@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import data from '../tasks';
 
-function Main() {
+function Main(props) {
   const [tasks, setTasks] = useState(data);
+
+  const addTodo = (newTodo) => {
+    setTasks([...tasks, newTodo]);
+  };
+
+  useEffect(() => {
+    const newTodo = props.todo;
+    if (newTodo) {
+      addTodo(newTodo);
+    }
+  }, [props.todo]);
 
   function setTodo(index) {
     setTasks((prevState) => {
